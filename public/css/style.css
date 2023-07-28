@@ -1,0 +1,9 @@
+.container-fluid {
+    padding-right: 35px;
+    padding-left: 35px;
+}
+
+ /* Custom row height */
+ #example tbody tr {
+    height: 20px; /* Adjust the height as per your requirement */
+}
