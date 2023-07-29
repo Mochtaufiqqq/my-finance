@@ -11,14 +11,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.js"></script>
+<script src="https://kit.fontawesome.com/4c48033608.js" crossorigin="anonymous"></script>
 
+{{-- datatable --}}
 <script>
     $(document).ready(function () {
         $('#example').DataTable({
             responsive: true,
+            processing: true,
+            language: {
+                lengthMenu: '_MENU_',
+                zeroRecords: "Tidak ada catatan yang cocok untuk ditemukan",
+                infoEmpty: "Tidak ada data",
+                emptyTable: "Tidak ada catatan yang cocok untuk ditemukan",
+                processing: `<div class="h-100 d-flex flex-column align-items-center justify-content-center">
+                <div class="spinner-border text-primary mb-3" role="status"><span class="sr-only">Processing...</span></div>
+                <span class="font-weight-semibold">Mohon Tunggu...</span>
+            </div>`,
+                search: 'Cari '
+            },
             dom: 'Bfrtip',
-            buttons: [
-                {
+            buttons: [{
                     extend: 'copy',
                     text: 'Copy to Clipboard', // Custom button text
                     className: 'btn btn-primary' // Apply custom CSS class
@@ -31,7 +47,8 @@
                 {
                     extend: 'excel',
                     text: 'Export Excel',
-                    className: 'btn btn-warning'
+                    className: 'btn btn-warning',
+
                 },
                 {
                     extend: 'pdf',
@@ -52,13 +69,15 @@
 <script>
     $(document).ready(function () {
         // When the "Pilih" button is clicked, autofill the "Kode" and "Nama" fields
-        $(".pilih-btn").on("click", function () {
-            var code = $(this).closest("tr").find("td:first-child").text();
-            var name = $(this).closest("tr").find("td:nth-child(2)").text();
+        $(document).on('click', '#pilih-btn', function () {
+            var id_coa = $(this).data('id');
+            var code = $(this).data('code');
+            var coa_name = $(this).data('coa_name');
 
             // Set the values in the input fields
+            $("#coa_id").val(id_coa);
             $("#codeCoa").val(code);
-            $("#name").val(name);
+            $("#coa_name").val(coa_name);
 
             // Close the modal after selecting
             $("#modalCoa").modal("hide");
@@ -68,18 +87,16 @@
 
 <script>
     function showDebitForm() {
-      // Tampilkan form nominal debit
-      document.getElementById("debitForm").style.display = "block";
-      // Sembunyikan form nominal kredit
-      document.getElementById("creditForm").style.display = "none";
+        // Tampilkan form nominal debit
+        document.getElementById("debitForm").style.display = "block";
+        // Sembunyikan form nominal kredit
+        document.getElementById("creditForm").style.display = "none";
     }
-  
+
     function showCreditForm() {
-      // Tampilkan form nominal kredit
-      document.getElementById("creditForm").style.display = "block";
-      // Sembunyikan form nominal debit
-      document.getElementById("debitForm").style.display = "none";
+        // Tampilkan form nominal kredit
+        document.getElementById("creditForm").style.display = "block";
+        // Sembunyikan form nominal debit
+        document.getElementById("debitForm").style.display = "none";
     }
-  </script>
-  
-  
+</script>

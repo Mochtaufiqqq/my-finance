@@ -14,7 +14,8 @@
                 <div class="card border-dark mb-5">
                     <div class="card-body">
                         <h5 class="card-title mb-4">Data Chart Of Account</h5>
-                        <a href="/chartofaccounts/create" class="btn btn-outline-primary mb-2">Tambah</a>
+                        <a href="/chartofaccounts/create" class="btn btn-outline-primary mb-2"><i
+                            class="fas fa-plus"></i> Tambah</a>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped-row" id="example">
                                 <thead>
@@ -130,5 +131,39 @@
     </div>
 </div>
 
+@section('js')
+
+@if(session()->has('success'))
+    <script>
+        $(document).ready(function(){
+            $.toast({
+                heading: 'Success',
+                text: '{{ session()->get('success') }}',
+                position: 'top-right',
+                loaderBg:'#fff',
+                icon: 'success',
+                hideAfter: 3500,
+                stack: 6
+            });
+        });
+    </script>
+@endif
+
+@if(session()->has('error'))
+    <script>
+        $(document).ready(function(){
+            $.toast({
+                heading: 'Error',
+                text: '{{ session()->get('error') }}',
+                position: 'top-right',
+                loaderBg:'#fff',
+                icon: 'error',
+                hideAfter: false,
+            });
+        });
+    </script>
+@endif
+    
+@endsection
 
 @endsection

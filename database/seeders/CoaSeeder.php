@@ -14,20 +14,21 @@ class CoaSeeder extends Seeder
     {
         \App\Models\ChartOfAccount::create([
             'category_id' => '1',
-            'code' => '001',
+            'code' => '401',
             'coa_name' => 'Gaji MPR',
             
         ]);
 
         \App\Models\ChartOfAccount::create([
             'category_id' => '2',
-            'code' => '002',
+            'code' => '402',
             'coa_name' => 'Bensin Anak',
             
         ]);
+        
         \App\Models\ChartOfAccount::create([
             'category_id' => '3',
-            'code' => '003',
+            'code' => '403',
             'coa_name' => 'Gaji Programmer',
             
         ]);

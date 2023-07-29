@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @include('includes.style')
     
-    <title>Document</title>
+    <title>MY-FINANCE | @yield('title')</title>
 </head>
 
 <body>

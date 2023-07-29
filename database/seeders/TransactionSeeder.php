@@ -15,7 +15,6 @@ class TransactionSeeder extends Seeder
         \App\Models\Transaction::create([
             'coa_id' => '1',
             'desc' => 'Gaji wakil dpr',
-            'transaction_type' => 'income',
             'debit' => '100000'
             
         ]);
@@ -23,7 +22,6 @@ class TransactionSeeder extends Seeder
         \App\Models\Transaction::create([
             'coa_id' => '2',
             'desc' => 'Gaji wakil mpr',
-            'transaction_type' => 'expense',
             'credit' => '200000'
             
         ]);

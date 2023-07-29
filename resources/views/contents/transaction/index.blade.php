@@ -24,7 +24,6 @@
                                         <th>COA Kode</th>
                                         <th>COA Nama</th>
                                         <th>Deskripsi</th>
-                                        <th>Tipe Transaksi</th>
                                         <th>Debit</th>
                                         <th>Kredit</th>
                                         <th>Opsi</th>
@@ -38,7 +37,6 @@
                                         <td>{{ $t->Coa->code }}</td>
                                         <td>{{ $t->Coa->coa_name }}</td>
                                         <td>{{ $t->desc }}</td>
-                                        <td>{{ $t->transaction_type }}</td>
                                         <td>{{ $t->debit }}</td>
                                         <td>{{ $t->credit }}</td>
                                         <td>
@@ -55,7 +53,7 @@
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="staticBackdropLabel">Hapus
-                                                                Kategori</h5>
+                                                                Transaksi</h5>
                                                             <button type="button" class="btn-close"
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
@@ -88,6 +86,26 @@
         </div>
     </div>
 </div>
+
+@section('js')
+
+@if(session()->has('success'))
+    <script>
+        $(document).ready(function(){
+            $.toast({
+                heading: 'Success',
+                text: '{{ session()->get('success') }}',
+                position: 'top-right',
+                loaderBg:'#fff',
+                icon: 'success',
+                hideAfter: 3500,
+                stack: 6
+            });
+        });
+    </script>
+@endif
+    
+@endsection
 
 
 @endsection

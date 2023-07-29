@@ -16,6 +16,7 @@
                         <h5 class="card-title mb-4">Form Tambah Transaksi</h5>
                         <form action="/transactions/store" method="POST">
                             @csrf
+
                             <div class="form-group mb-2">
                                 <label class="form-label" for="">Tanggal</label>
                                 <input name="transaction_date" type="text" class="form-control"
@@ -25,25 +26,27 @@
                                 <div class="text-danger">{{ $errors->first('transaction_date') }}</div>
                                 @endif
                             </div>
-                            <label class="form-label" for="">Kode</label>
+                            <input type="hidden" name="coa_id" id="coa_id" >
+                            <label class="form-label" for="">Kode COA</label>
                             <div class="input-group form-group mb-2">
                                 <input type="text" class="form-control" id="codeCoa"
                                     placeholder="Pilih chart of account" aria-label="Recipient's username"
-                                    aria-describedby="button-addon2" name="coa_id" value="" readonly>
+                                    aria-describedby="button-addon2" name="" value="" readonly>
                                 <button type="button" class="btn btn-info btn-flat" data-bs-toggle="modal"
                                     data-bs-target="#modalCoa">Pilih
                                 </button>
-                                @if ($errors->has('code'))
-                                <div class="text-danger">{{ $errors->first('code') }}</div>
-                                @endif
+                                
                             </div>
+                            @if ($errors->has('coa_id'))
+                                <div class="text-danger">{{ $errors->first('coa_id') }}</div>
+                                @endif
                             <div class="form-group mb-2">
-                                <label class="form-label" for="">Nama</label>
+                                <label class="form-label" for="">Nama COA</label>
                                 <input type="text" class="form-control" placeholder="Nama"
-                                    value="" id="name" readonly>
-                                {{-- @if ($errors->has('coa_name'))
-                                <div class="text-danger">{{ $errors->first('coa_name') }}</div>
-                                @endif --}}
+                                    value="" id="coa_name" readonly>
+                                @if ($errors->has('coa_id'))
+                                <div class="text-danger">{{ $errors->first('coa_id') }}</div>
+                                @endif
                             </div>
                             <div class="form-group mb-2">
                                 <label class="form-label" for="">Deskripsi</label>
@@ -53,33 +56,27 @@
                                 <div class="text-danger">{{ $errors->first('desc') }}</div>
                                 @endif
                             </div>
-                            <div class="form-group mb-2">
-                                <label class="form-label" for="">Jenis Transaksi</label>
-                                <select class="form-control" name="transaction_type" id="">
-                                    <option value="" selected disabled>Pilih jenis transaksi</option>
-                                    <option value="income">Pendapatan</option>
-                                    <option value="expense">Pengeluaran</option>
-
-                                </select>
-                                @if ($errors->has('transaction_type'))
-                                <div class="text-danger">{{ $errors->first('transaction_type') }}</div>
-                                @endif
-                            </div>
-                            <label for="" class="form-label">Jenis Pembayaran</label>
+                          
+                            <label for="" class="form-label">Jenis Transaksi</label>
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="showDebitForm()">
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                  Debit
+                                  Pemasukan
                                 </label>
+                               
                               </div>
                               
                               <div class="form-check">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" onclick="showCreditForm()" >
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                  Credit
+                                  Pengeluaran
                                 </label>
                               </div>
-                              
+                              @if ($errors->has('debit'))
+                              <div class="text-danger">{{ $errors->first('debit') }}</div>
+                              @elseif ($errors->has('credit'))
+                              <div class="text-danger">{{ $errors->first('debit') }}</div>
+                              @endif
                               <!-- Form input nominal debit (sembunyikan awalnya) -->
                               <div class="form-group" id="debitForm" style="display: none;">
                                 <input type="number" class="form-control" name="debit" placeholder="Masukan Nominal">
@@ -106,41 +103,6 @@
 </div>
 
 
-<!-- Modal Choose COA-->
-<div class="modal fade" id="modalCoa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Pilih COA</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-bordered" id="customerTable">
-                    <thead>
-                        <tr>
-                            <th>Kode</th>
-                            <th>Nama</th>
-                            <th>Opsi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Customer data goes here -->
-                        @foreach ($coa as $c)
-                        <tr>
-                            <td>{{ $c->code }}</td>
-                            <td>{{ $c->coa_name }}</td>
-                            <td>
-                                <button class="btn btn-primary pilih-btn" data-id="{{ $c->id_coa }}"
-                                    type="button">Pilih</button>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
+@include('contents.transaction.modal-coa')
 
 @endsection

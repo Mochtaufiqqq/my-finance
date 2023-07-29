@@ -11,9 +11,15 @@ class Transaction extends Model
 
     protected $primaryKey = 'id_transaction';
 
-    protected $fillable = ['transaction_date','coa_id','desc','transaction_type','debit','credit'];
+    protected $fillable = ['transaction_date','coa_id','desc','debit','credit'];
 
-    protected $dates = ['transaction_date'];
+    protected $dates = [
+        'transaction_date' => 'datetime',
+    ];
+
+    // protected $casts = [
+    //     'transaction_date' => 'datetime',
+    // ];
 
     public function Coa()
     {

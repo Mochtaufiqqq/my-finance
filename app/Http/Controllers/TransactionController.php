@@ -31,9 +31,14 @@ class TransactionController extends Controller
             'transaction_date' => 'required',
             'coa_id' => 'required',
             'desc' => 'required',
-            'transaction_type' => 'required',
-            // 'debit' => 'decimal',
-            // 'credit' => 'decimal'
+            'debit' => 'required_without:credit|nullable|numeric', // Required if credit is empty, and it should be numeric
+            'credit' => 'required_without:debit|nullable|numeric', // Required if debit is empty, and it should be numeric
+        ],[
+            'transaction_date.required' => 'Tanggal transaksi dibutuhkan',
+            'coa_id.required' => 'Bagian ini tidak boleh kosong',
+            'desc' => 'Deskripsi dibutuhkan',
+            'debit.required_without' => 'Bagian ini harus diisi',
+            'credit.required.without' => 'Bagian ini harus diisi',
         ]);
 
         if ($validate->fails()) {
@@ -44,16 +49,15 @@ class TransactionController extends Controller
         date_default_timezone_set('Asia/Bangkok');
 
         Transaction::create([
-            'transaction_date' => date('Y-m-d-h-i-s'),
+            'transaction_date' => date('Y-m-d h:i:s'),
             'coa_id' => $data['coa_id'],
             'desc' => $data['desc'],
-            'transaction_type' => $data['transaction_type'],
-            'debit' => $data['debit'] ?? '100',
-            'credit' => $data['credit'] ?? '100',
+            'debit' => $data['debit'] ?? null,
+            'credit' => $data['credit'] ?? null,
         ]);
 
-        // return redirect('/transactions')->with('success','Data transaksi berhasil ditambahkan');
-        dd($request);
+        return redirect('/transactions')->with('success','Data transaksi berhasil ditambahkan');
+        // dd($request);
     }
 
     public function edit($id_transaction)
@@ -72,28 +76,40 @@ class TransactionController extends Controller
             'transaction_date' => 'required',
             'coa_id' => 'required',
             'desc' => 'required',
-            'transaction_type' => 'required',
-            // 'debit' => 'decimal',
-            // 'credit' => 'decimal'
+            'debit' => 'required_without:credit|nullable|numeric', // Required if credit is empty, and it should be numeric
+            'credit' => 'required_without:debit|nullable|numeric', // Required if debit is empty, and it should be numeric
+        ],[
+            'transaction_date.required' => 'Tanggal transaksi dibutuhkan',
+            'coa_id.required' => 'Bagian ini tidak boleh kosong',
+            'desc' => 'Deskripsi dibutuhkan',
+            'debit.required_without' => 'Bagian ini harus diisi',
+            'credit.required.without' => 'Bagian ini harus diisi',
         ]);
 
         if ($validate->fails()) {
-            // return back()->withInput()->withErrors($validate);
-            dd($request);
+            return back()->withInput()->withErrors($validate);
+            // dd($request);
         }
 
         date_default_timezone_set('Asia/Bangkok');
 
         Transaction::where('id_transaction',$id_transaction)->update([
-            'transaction_date' => date('Y-m-d-h-i-s'),
+            'transaction_date' => date('Y-m-d h:i:s'),
             'coa_id' => $data['coa_id'],
             'desc' => $data['desc'],
-            'transaction_type' => $data['transaction_type'],
-            'debit' => $data['debit'] ??'100',
-            'credit' => $data['credit'] ??'100' ,
+            'debit' => $data['debit'] ?? null,
+            'credit' => $data['credit'] ?? null ,
         ]);
 
         return redirect('/transactions')->with('success','Data transaksi berhasil diubah');
+
+    }
+
+    public function destroy($id_transaction)
+    {
+        Transaction::findOrFail($id_transaction)->delete();
+
+        return redirect('/transactions')->with('success','Data transaksi berhasil dihapus');
 
     }
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Validator;
-use App\Models\ChartOfAccount;
 use App\Models\CoaCategory;
-use Illuminate\Support\Facades\DB;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\ChartOfAccount;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CoaController extends Controller
 {
@@ -108,11 +109,16 @@ class CoaController extends Controller
 
     public function destroy($id_coa)
     {
-        $coa = ChartOfAccount::findOrFail($id_coa);
+        $hasTransactions = Transaction::where('coa_id', $id_coa)->exists();
+        if ($hasTransactions) {
+            return redirect()->back()->with('error', 'Tidak dapat menghapus COA karena memiliki transaksi terkait.');
+        }
+    
+        ChartOfAccount::findOrFail($id_coa)->delete();
 
-        $coa->delete();
 
         return redirect('/chartofaccounts')->with('success','Data berhasil dihapus');
 
     }
 }
+

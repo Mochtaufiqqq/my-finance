@@ -16,9 +16,9 @@ return new class extends Migration
             $table->dateTime('transaction_date')->nullable();
             $table->foreignId('coa_id');
             $table->string('desc');
-            $table->enum('transaction_type',['income','expense']);
-            $table->decimal('debit')->nullable();
-            $table->decimal('credit')->nullable();
+            // $table->enum('transaction_type',['income','expense']);
+            $table->decimal('debit', 10, 2)->nullable();
+            $table->decimal('credit', 10, 2)->nullable();
             $table->timestamps();
         });
     }
