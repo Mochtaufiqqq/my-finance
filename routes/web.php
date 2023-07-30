@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CoaController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 
 /*
@@ -20,6 +21,8 @@ use App\Http\Controllers\TransactionController;
 // Route::get('/', function () {
 //     return view('layouts.master');
 // });
+
+Route::get('/',[HomeController::class,'index']);
 
 Route::group(['prefix' => 'categories'], function () {
     Route::get('/', [CategoryController::class, 'index']);
@@ -48,3 +51,4 @@ Route::prefix('transactions')->group(function () {
 
 
 Route::get('/reports',[ReportController::class,'index']);
+Route::post('/reports/getreports',[ReportController::class,'getReport']);

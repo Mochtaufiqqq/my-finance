@@ -9,21 +9,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link{{ Request::is('/') ? ' active' : '' }}" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/categories">Kategori</a>
+                    <a class="nav-link{{ Request::is('categories') ? ' active' : '' }}" href="/categories">Kategori</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/chartofaccounts">COA</a>
+                    <a class="nav-link{{ Request::is('chartofaccounts') ? ' active' : '' }}" href="/chartofaccounts">COA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/transactions">Transaksi</a>
+                    <a class="nav-link{{ Request::is('transactions') ? ' active' : '' }}" href="/transactions">Transaksi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/reports">Laporan</a>
+                    <a class="nav-link{{ Request::is('reports') ? ' active' : '' }}" href="/reports">Laporan</a>
                 </li>
-               
             </ul>
             {{-- <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

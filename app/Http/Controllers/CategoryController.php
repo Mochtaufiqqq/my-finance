@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChartOfAccount;
 use App\Models\CoaCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -62,9 +63,14 @@ class CategoryController extends Controller
 
     public function destroy($id_category)
     {
-        $categories = CoaCategory::findOrFail($id_category);
 
-        $categories->delete();
+        $hasCoa = ChartOfAccount::where('category_id', $id_category)->exists();
+        if ($hasCoa) {
+            return redirect()->back()->with('error', 'Tidak dapat menghapus Kategori karena memiliki COA terkait.');
+        }
+
+        CoaCategory::findOrFail($id_category)->delete();
+
 
         return redirect('/categories')->with('success','Data kategori berhasil dihapus');
 

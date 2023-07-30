@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+
+@section('title','Create COA')
+    
 @section('content')
 
 

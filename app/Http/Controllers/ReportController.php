@@ -11,20 +11,18 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $categories = CoaCategory::latest()->get();
-        $transactions = Transaction::latest()->get();
-        // Prepare the unique transaction dates
-    //     $uniqueDates = $transactions->pluck('transaction_date')->unique()->toArray();
+        
+        return view('contents.report.index');
+    }
 
-    // // Filter transactions based on a specific month (for example, August 2023)
-    //     $month = 7; // August
-    //     $year = 2023;
-    //     $filteredTransactions = $transactions->filter(function ($transaction) use ($month, $year) {
-    //         return Carbon::parse($transaction->transaction_date)->month === $month && Carbon::parse($transaction->transaction_date)->year === $year;
-    //     });
+    public function getReport(Request $request)
+    {
+        $from = $request->from . ' ' . '00:00:00';
+        $to = $request->to . ' ' . '23:59:59';
 
-    // // Prepare the unique transaction dates for the filtered transactions
-    //      $uniqueDates = $filteredTransactions->pluck('transaction_date')->unique()->toArray();
-        return view('contents.report.index',compact('categories','transactions'));
+        $transactions = Transaction::whereBetween('transaction_date',[$from, $to])->get();
+
+        return view('contents.report.index',compact('transactions','from','to'));
+
     }
 }

@@ -1,5 +1,7 @@
 @extends('layouts.master')
 
+@section('title','Edit Transaction')
+    
 @section('content')
 
 
@@ -50,7 +52,7 @@
                                 @endif
                             </div>
                             <div class="form-group mb-2">
-                                <label class="form-label" for="">Deskripsi</label>
+                                <label class="form-label" for="">Keterangan</label>
                                 <textarea class="form-control" name="desc" id="" rows="2"
                                     placeholder="Deskripsi">{{ $transactions->desc }}</textarea>
                                 @if ($errors->has('desc'))
@@ -63,19 +65,20 @@
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                  Debit
+                                  Pemasukan
                                 </label>
                               </div>
 
                                <!-- Form input nominal debit (sembunyikan awalnya) -->
                                <div class="form-group">
-                                <input type="number" class="form-control" name="debit" placeholder="Masukan Nominal" value="{{ $transactions->debit }}">
+                                <label for="" class="form-label">Nominal</label>
+                                <input type="number" step="0.01" class="form-control" name="debit" placeholder="Masukan Nominal" value="{{ $transactions->debit }}">
                               </div>
                               @elseif ($transactions->credit)
                               <div class="form-check">
                                 <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                  Kredit
+                                  Pengeluaran
                                 </label>
                               </div>
                               @if ($errors->has('debit'))
@@ -85,7 +88,8 @@
                               @endif
                                <!-- Form input nominal kredit -->
                                <div class="form-group">
-                                <input type="number" class="form-control" name="credit" placeholder="Masukan Nominal" value="{{ $transactions->credit }}">
+                                <label for="" class="form-label">Nominal</label>
+                                <input type="number" step="0.01" class="form-control" name="credit" placeholder="Masukan Nominal" value="{{ $transactions->credit }}">
                               </div>
                             @endif
 

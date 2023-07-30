@@ -8,11 +8,12 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table class="table table-bordered" id="customerTable">
+                <div class="table-responsive">
+                <table class="table table-bordered" id="example">
                     <thead>
                         <tr>
                             <th>Kode</th>
-                            <th>Nama</th>
+                            <th>Nama COA</th>
                             <th>Kategori</th>
                             <th>Opsi</th>
                         </tr>
@@ -25,7 +26,7 @@
                             <td>{{ $c->coa_name }}</td>
                             <td>{{ $c->Category->name }}</td>
                             <td>
-                                <button class="btn btn-primary" id="pilih-btn" 
+                                <button class="btn btn-sm btn-primary" id="pilih-btn" 
                                     data-id="{{ $c->id_coa }}" 
                                     data-code="{{ $c->code }}" 
                                     data-coa_name="{{ $c->coa_name }}"
@@ -36,6 +37,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     </div>

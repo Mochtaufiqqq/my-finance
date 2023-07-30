@@ -16,11 +16,11 @@
                 <div class="card border-dark mb-5">
                     <div class="card-body">
                         <h5 class="card-title mb-4">Data Kategori</h5>
-                        <a href="" class="btn btn-outline-primary mb-2" data-bs-toggle="modal"
-                            data-bs-target="#createModal">Tambah</a>
+                        <a href="" class="btn btn-outline-primary mb-4" data-bs-toggle="modal"
+                            data-bs-target="#createModal"><I class="fas fa-plus"></I> Tambah</a>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped-row" id="example">
-                                <thead>
+                                <thead class="table-primary">
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Kategori</th>
@@ -34,9 +34,11 @@
                                         <td>{{ $c->name }}</td>
                                         <td>
                                             {{-- <a href="" class="btn btn-outline-primary">Lihat</a> --}}
+                                            <div class="button-container">
                                             <a href="/categories/update/{{ $c->id_category }}" class="btn btn-outline-warning" data-bs-toggle="modal"
-                                                data-bs-target="#EditModal{{ $c->id_category }}">Edit</a>
-                                            <a href="/categories/delete/{{ $c->id_category }}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $c->id_category }}">Hapus</a>
+                                                data-bs-target="#EditModal{{ $c->id_category }}"><i class="fas fa-edit"></i></a>
+                                            <a href="/categories/delete/{{ $c->id_category }}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $c->id_category }}"><i class="fas fa-trash"></i></a>
+                                        </div>
 
                                             <!-- Edit Modal -->
                                             <div class="modal fade" id="EditModal{{ $c->id_category }}"
@@ -142,6 +144,10 @@
     </div>
 </div>
 
+
+
+@endsection
+
 @section('js')
 
 @if(session()->has('success'))
@@ -159,7 +165,20 @@
         });
     </script>
 @endif
-    
-@endsection
 
+@if(session()->has('error'))
+    <script>
+        $(document).ready(function(){
+            $.toast({
+                heading: 'Error',
+                text: '{{ session()->get('error') }}',
+                position: 'top-right',
+                loaderBg:'#fff',
+                icon: 'error',
+                hideAfter: false,
+            });
+        });
+    </script>
+@endif
+    
 @endsection

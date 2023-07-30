@@ -19,3 +19,22 @@
  input[type=number] {
      -moz-appearance: textfield;
  }
+
+ .table-responsive .btn {
+    padding: 5px 10px ;
+    margin: 10px 3px 10px 0;
+    margin-bottom: 20px;
+ }
+
+ .button-container {
+    display: flex;
+}
+
+/* Add some spacing between the buttons (optional) */
+.button-container a {
+    margin-right: 10px; /* Adjust the value as needed */
+}
+
+.custom-card {
+    margin-bottom: 20px;
+}

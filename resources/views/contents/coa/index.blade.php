@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
+
+@section('title','Chart Of Accounts')
+    
 @section('content')
 
 
@@ -14,11 +17,11 @@
                 <div class="card border-dark mb-5">
                     <div class="card-body">
                         <h5 class="card-title mb-4">Data Chart Of Account</h5>
-                        <a href="/chartofaccounts/create" class="btn btn-outline-primary mb-2"><i
+                        <a href="/chartofaccounts/create" class="btn btn-outline-primary mb-4"><i
                             class="fas fa-plus"></i> Tambah</a>
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped-row" id="example">
-                                <thead>
+                                <thead class="table-primary">
                                     <tr>
                                         <th>No</th>
                                         <th>Kode</th>
@@ -36,10 +39,11 @@
                                         <td>{{ $c->Category->name }}</td>
                                         <td>
                                             {{-- <a href="" class="btn btn-outline-primary">Lihat</a> --}}
-                                            <a href="/chartofaccounts/detail/{{ $c->id_coa }}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $c->id_coa }}">Lihat</a>
-                                            <a href="/chartofaccounts/edit/{{ $c->id_coa }}" class="btn btn-outline-warning">Edit</a>
-                                            <a href="/chartofaccounts/delete/{{ $c->id_coa }}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $c->id_coa }}">Hapus</a>
-                                            
+                                            <div class="button-container">
+                                            <a href="/chartofaccounts/detail/{{ $c->id_coa }}" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#detailModal{{ $c->id_coa }}"><i class="fas fa-eye"></i></a>
+                                            <a href="/chartofaccounts/edit/{{ $c->id_coa }}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
+                                            <a href="/chartofaccounts/delete/{{ $c->id_coa }}" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $c->id_coa }}"><i class="fas fa-trash"></i></a>
+                                        </div>
 
 
                                             {{-- Delete Modal --}}
@@ -83,29 +87,23 @@
                                                                 data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                           <div class="row">
-                                                            <div class="col">
-                                                                <div class="card">
-                                                                    <div class="card-body">
-                                                                        <table class="table table-bordered">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th>Kode</th>
-                                                                                    <th>Nama</th>
-                                                                                    <th>Kategori</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td>{{ $c->code }}</td>
-                                                                                    <td>{{ $c->coa_name }}</td>
-                                                                                    <td>{{ $c->Category->name }}</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                           <div class="table-responsive">
+                                                            <table class="table table-bordered table-striped-row">
+                                                                <thead >
+                                                                    <tr>
+                                                                        <th>Kode</th>
+                                                                        <th>Nama</th>
+                                                                        <th>Kategori</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>{{ $c->code }}</td>
+                                                                        <td>{{ $c->coa_name }}</td>
+                                                                        <td>{{ $c->Category->name }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
