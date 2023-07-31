@@ -36,7 +36,7 @@ class TransactionController extends Controller
         ],[
             'transaction_date.required' => 'Tanggal transaksi dibutuhkan',
             'coa_id.required' => 'Bagian ini tidak boleh kosong',
-            'desc' => 'Deskripsi dibutuhkan',
+            'desc' => 'Keterangan dibutuhkan',
             'debit.required_without' => 'Bagian ini harus diisi',
             'credit.required.without' => 'Bagian ini harus diisi',
         ]);
@@ -81,7 +81,7 @@ class TransactionController extends Controller
         ],[
             'transaction_date.required' => 'Tanggal transaksi dibutuhkan',
             'coa_id.required' => 'Bagian ini tidak boleh kosong',
-            'desc' => 'Deskripsi dibutuhkan',
+            'desc' => 'Keterangan dibutuhkan',
             'debit.required_without' => 'Bagian ini harus diisi',
             'credit.required.without' => 'Bagian ini harus diisi',
         ]);
@@ -112,4 +112,26 @@ class TransactionController extends Controller
         return redirect('/transactions')->with('success','Data transaksi berhasil dihapus');
 
     }
+
+    public function trash()
+    {
+        $transactions = Transaction::onlyTrashed()->latest()->get();
+
+        return view('contents.transaction.trash',compact('transactions'));
+    }
+
+    public function forceDelete($id_transaction)
+    {
+        Transaction::onlyTrashed()->findOrFail($id_transaction)->forceDelete();
+
+        return redirect('/transactions/trash')->with('success','Data transaksi berhasil dihapus');
+    }
+
+    public function restore($id_transaction)
+    {
+        Transaction::onlyTrashed()->findOrFail($id_transaction)->restore();
+
+        return redirect('/transactions')->with('success','Data transaksi berhasil dikembalikan');
+    }
+
 }

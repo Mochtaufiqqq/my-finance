@@ -18,7 +18,6 @@
                         <h5 class="card-title mb-4">Form Tambah Transaksi</h5>
                         <form action="/transactions/store" method="POST">
                             @csrf
-
                             <div class="form-group mb-2">
                                 <label class="form-label" for="">Tanggal</label>
                                 <input name="transaction_date" type="text" class="form-control"
@@ -51,9 +50,9 @@
                                 @endif
                             </div>
                             <div class="form-group mb-2">
-                                <label class="form-label" for="">Deskripsi</label>
+                                <label class="form-label" for="">Keterangan</label>
                                 <textarea class="form-control" name="desc" id="" rows="2"
-                                    placeholder="Deskripsi">{{ old('desc') }}</textarea>
+                                    placeholder="Keterangan">{{ old('desc') }}</textarea>
                                 @if ($errors->has('desc'))
                                 <div class="text-danger">{{ $errors->first('desc') }}</div>
                                 @endif

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title','Edit Transaction')
-    
+
 @section('content')
 
 
@@ -29,20 +29,21 @@
                                 <div class="text-danger">{{ $errors->first('transaction_date') }}</div>
                                 @endif
                             </div>
-                            <input type="hidden" name="coa_id" id="coa_id" value="{{ $transactions->coa_id }}" >
+                            <input type="hidden" name="coa_id" id="coa_id" value="{{ $transactions->coa_id }}">
                             <label class="form-label" for="">Kode COA</label>
                             <div class="input-group form-group mb-2">
                                 <input type="text" class="form-control" id="codeCoa"
                                     placeholder="Pilih chart of account" aria-label="Recipient's username"
-                                    aria-describedby="button-addon2" name="" value="{{ $transactions->Coa->code }}" readonly>
+                                    aria-describedby="button-addon2" name="" value="{{ $transactions->Coa->code }}"
+                                    readonly>
                                 <button type="button" class="btn btn-info btn-flat" data-bs-toggle="modal"
                                     data-bs-target="#modalCoa">Pilih
                                 </button>
-                                
+
                             </div>
                             @if ($errors->has('coa_id'))
-                                <div class="text-danger">{{ $errors->first('coa_id') }}</div>
-                                @endif
+                            <div class="text-danger">{{ $errors->first('coa_id') }}</div>
+                            @endif
                             <div class="form-group mb-2">
                                 <label class="form-label" for="">Nama COA</label>
                                 <input type="text" class="form-control" placeholder="Nama"
@@ -54,43 +55,47 @@
                             <div class="form-group mb-2">
                                 <label class="form-label" for="">Keterangan</label>
                                 <textarea class="form-control" name="desc" id="" rows="2"
-                                    placeholder="Deskripsi">{{ $transactions->desc }}</textarea>
+                                    placeholder="Keterangan">{{ $transactions->desc }}</textarea>
                                 @if ($errors->has('desc'))
                                 <div class="text-danger">{{ $errors->first('desc') }}</div>
                                 @endif
                             </div>
-                         
+
                             <label for="" class="form-label">Jenis Pembayaran</label>
                             @if ($transactions->debit)
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault1" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                  Pemasukan
+                                    Pemasukan
                                 </label>
-                              </div>
+                            </div>
 
-                               <!-- Form input nominal debit (sembunyikan awalnya) -->
-                               <div class="form-group">
+                            <!-- Form input nominal debit (sembunyikan awalnya) -->
+                            <div class="form-group">
                                 <label for="" class="form-label">Nominal</label>
-                                <input type="number" step="0.01" class="form-control" name="debit" placeholder="Masukan Nominal" value="{{ $transactions->debit }}">
-                              </div>
-                              @elseif ($transactions->credit)
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <input type="number" step="0.01" class="form-control" name="debit"
+                                    placeholder="Masukan Nominal" value="{{ $transactions->debit }}">
+                            </div>
+                            @elseif ($transactions->credit)
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                    id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                  Pengeluaran
+                                    Pengeluaran
                                 </label>
-                              </div>
-                              @if ($errors->has('debit'))
-                              <div class="text-danger">{{ $errors->first('debit') }}</div>
-                              @elseif ($errors->has('credit'))
-                              <div class="text-danger">{{ $errors->first('debit') }}</div>
-                              @endif
-                               <!-- Form input nominal kredit -->
-                               <div class="form-group">
+                            </div>
+                            @if ($errors->has('debit'))
+                            <div class="text-danger">{{ $errors->first('debit') }}</div>
+                            @elseif ($errors->has('credit'))
+                            <div class="text-danger">{{ $errors->first('debit') }}</div>
+                            @endif
+                            <!-- Form input nominal kredit -->
+                            <div class="form-group">
                                 <label for="" class="form-label">Nominal</label>
-                                <input type="number" step="0.01" class="form-control" name="credit" placeholder="Masukan Nominal" value="{{ $transactions->credit }}">
-                              </div>
+                                <input type="number" step="0.01" class="form-control" name="credit"
+                                    placeholder="Masukan Nominal" value="{{ $transactions->credit }}">
+                            </div>
                             @endif
 
                     </div>

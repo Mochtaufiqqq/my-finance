@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.js"></script>
 <script src="https://kit.fontawesome.com/4c48033608.js" crossorigin="anonymous"></script>
-<script src="/js/index.js"></script>
+<script src="/js/datatable/report.js"></script>
 
 
 {{-- datatable --}}

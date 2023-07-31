@@ -23,7 +23,7 @@
     @include('includes.script')
     @yield('js')
 
-    <footer>asdasd</footer>
+    
 </body>
 
 </html>

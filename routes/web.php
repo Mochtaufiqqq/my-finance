@@ -22,7 +22,7 @@ use App\Http\Controllers\TransactionController;
 //     return view('layouts.master');
 // });
 
-Route::get('/',[HomeController::class,'index']);
+// Route::get('/',[HomeController::class,'index']);
 
 Route::group(['prefix' => 'categories'], function () {
     Route::get('/', [CategoryController::class, 'index']);
@@ -47,6 +47,10 @@ Route::prefix('transactions')->group(function () {
     Route::get('/edit/{id_transaction}', [TransactionController::class, 'edit']);
     Route::put('/update/{id_transaction}', [TransactionController::class, 'update']);
     Route::delete('/delete/{id_transaction}', [TransactionController::class, 'destroy']);
+    Route::get('/trash', [TransactionController::class, 'trash']);
+    Route::delete('/trash/delete/{id_transaction}', [TransactionController::class, 'forceDelete']);
+    Route::put('/trash/restore/{id_transaction}',[TransactionController::class,'restore']);
+
 });
 
 

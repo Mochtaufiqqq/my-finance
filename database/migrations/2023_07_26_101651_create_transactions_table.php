@@ -19,6 +19,7 @@ return new class extends Migration
             // $table->enum('transaction_type',['income','expense']);
             $table->decimal('debit', 10, 2)->nullable();
             $table->decimal('credit', 10, 2)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
