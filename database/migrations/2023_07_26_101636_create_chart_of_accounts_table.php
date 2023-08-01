@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('chart_of_accounts', function (Blueprint $table) {
             $table->id('id_coa');
-            $table->integer('code')->unique();
+            $table->string('code')->unique();
             $table->string('coa_name');
             $table->foreignId('category_id');
             $table->timestamps();
